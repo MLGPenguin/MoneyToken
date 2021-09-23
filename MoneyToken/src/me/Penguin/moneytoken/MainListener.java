@@ -37,7 +37,7 @@ public class MainListener implements Listener{
 							double total = amount * times;
 							p.getInventory().setItemInMainHand(new ItemStack(Material.AIR, 1));
 							plugin.eco.depositPlayer(p, total);
-							p.sendMessage(u.cc("&bReceived &a$" + u.dc(total)));							
+							p.sendMessage(u.cc("&7Received &a$" + u.dc(total)));							
 						}
 					}
 				}
