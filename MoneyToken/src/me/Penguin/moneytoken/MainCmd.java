@@ -41,7 +41,7 @@ public class MainCmd implements TabExecutor {
 							}
 							double amount = Integer.parseInt(args[2]);
 							np.getInventory().addItem(u.createToken(amount));
-							np.sendMessage(u.cc("&bReceived token for &a$" + amount ));
+							np.sendMessage(u.cc("&bReceived token for &a$" + u.dc(amount)));
 							return true;
 							}
 						}
