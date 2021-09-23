@@ -1,0 +1,22 @@
+author: PenguinMan
+description: "Very LightWeight plugin allows creating Redeemable Money Tokens"
+main: me.Penguin.moneytoken.Main
+name: MoneyTokens
+version: 1.0.0
+depend: []
+api-version: 1.16
+
+commands:
+
+  moneytoken: 
+    usage: /<command> [give]
+    description: "default comand for mt"
+    aliases: [mt]
+
+
+permissions: 
+    
+  moneytoken.give:
+    default: op
+    description: "allows mt give command"
+    
