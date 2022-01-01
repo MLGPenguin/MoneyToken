@@ -31,6 +31,7 @@ public class MainListener implements Listener{
 					if (i.getType() == Material.SUNFLOWER) {
 						ItemMeta im = i.getItemMeta();
 						if (im.getPersistentDataContainer().has(u.key, PersistentDataType.DOUBLE)) {
+							e.setCancelled(true);
 							PersistentDataContainer c = im.getPersistentDataContainer();
 							int times = i.getAmount();
 							double amount = c.get(u.key, PersistentDataType.DOUBLE);
