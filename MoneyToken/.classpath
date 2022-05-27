@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/baww1/Desktop/JAR THINGS/plugins/PLUGINS/1.16.1/spigot-1.16.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/baww1/Desktop/Servers/Paper 1.16.1/plugins/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/baww1/Desktop/JUNII/plugins/necessity plugins (all servers)/Vault.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
