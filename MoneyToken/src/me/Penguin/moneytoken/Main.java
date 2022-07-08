@@ -28,7 +28,7 @@ public class Main extends PenguinPlugin {
 	}
 
 	@SuppressWarnings("serial")
-	public static HashMap<Integer, Range> CoinVaultLevels = new HashMap<Integer, Range>() {{
+	public static HashMap<Integer, Range> CoinVaultLevels = new HashMap<>() {{
 		put(1, new Range(25_000, 100_000));
 		put(2, new Range(100_000, 500_000));
 		put(3, new Range(500_000, 2_500_000));
