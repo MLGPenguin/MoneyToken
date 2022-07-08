@@ -3,18 +3,18 @@ package me.Penguin.moneytoken;
 
 import java.util.HashMap;
 
-import me.Penguin.SuperPenguinCore.api.PenguinPlugin;
+import me.Penguin.SuperPenguinCore.API.PenguinPlugin;
+import me.Penguin.SuperPenguinCore.Util.Range;
 import me.Penguin.moneytoken.Commands.CommandCoinVault;
 import me.Penguin.moneytoken.Commands.CommandMoneyToken;
 import me.Penguin.moneytoken.Objects.CoinPouch;
 import me.Penguin.moneytoken.Objects.Token;
-import me.Penguin.moneytoken.util.Range;
 
 public class Main extends PenguinPlugin {
 
 	@Override
 	public void OnEnable() {}
-	
+
 	@Override
 	public void onDisable() {}
 
@@ -22,11 +22,11 @@ public class Main extends PenguinPlugin {
 	public void register() {
 		new Token(0);
 		new CoinPouch(0);
-		
+
 		new CommandMoneyToken();
 		new CommandCoinVault();
 	}
-	
+
 	@SuppressWarnings("serial")
 	public static HashMap<Integer, Range> CoinVaultLevels = new HashMap<Integer, Range>() {{
 		put(1, new Range(25_000, 100_000));

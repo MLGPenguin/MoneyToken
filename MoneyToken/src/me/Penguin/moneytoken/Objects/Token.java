@@ -4,30 +4,30 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Penguin.SuperPenguinCore.Items.Interactable;
-import me.Penguin.SuperPenguinCore.api.PenguinEconomyAPI;
-import me.Penguin.SuperPenguinCore.util.MIB;
-import me.Penguin.SuperPenguinCore.util.u;
+import me.Penguin.SuperPenguinCore.API.PenguinEconomyAPI;
+import me.Penguin.SuperPenguinCore.Items.Redeemable;
+import me.Penguin.SuperPenguinCore.Util.MIB;
+import me.Penguin.SuperPenguinCore.Util.u;
 
-public class Token extends Interactable {
-	
+public class Token extends Redeemable {
+
 	private double amount;
-	
+
 	public Token(double amount) {
 		this.amount = amount;
 	}
-	
+
 	@Override
 	public ItemStack getItem() {
 		return new MIB(Material.SUNFLOWER)
 				.setName("&a$" + u.dc(amount))
 				.addLores("&7Right-Click to redeem &a$" + u.dc(amount))
 				.setLocname("token:" + amount)
-				.build();				
+				.build();
 	}
 
 	@Override
-	public void OnInteract(ItemStack item, Player player) {
+	public void OnRedeem(ItemStack item, Player player) {
 		double amount = getAmount(item);
 		PenguinEconomyAPI.deposit(player, amount);
 		removeOne(item);
@@ -36,11 +36,11 @@ public class Token extends Interactable {
 
 	@Override
 	public boolean isItem(ItemStack item) {
-		return getLocname(item).startsWith("token:");	
-	}	
-	
+		return getLocname(item).startsWith("token:");
+	}
+
 	private double getAmount(ItemStack item) {
-		return Double.valueOf(getLocname(item).split(":")[1]);	
+		return Double.parseDouble(getLocname(item).split(":")[1]);
 	}
 
 }

@@ -4,16 +4,16 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.Penguin.SuperPenguinCore.Items.Interactable;
-import me.Penguin.SuperPenguinCore.api.PenguinEconomyAPI;
-import me.Penguin.SuperPenguinCore.util.MIB;
-import me.Penguin.SuperPenguinCore.util.u;
+import me.Penguin.SuperPenguinCore.API.PenguinEconomyAPI;
+import me.Penguin.SuperPenguinCore.Items.Redeemable;
+import me.Penguin.SuperPenguinCore.Util.MIB;
+import me.Penguin.SuperPenguinCore.Util.u;
 import me.Penguin.moneytoken.Main;
 
-public class CoinPouch extends Interactable {
-	
+public class CoinPouch extends Redeemable {
+
 	private int tier;
-	
+
 	public CoinPouch(int tier) {
 		this.tier = tier;
 	}
@@ -29,7 +29,7 @@ public class CoinPouch extends Interactable {
 	}
 
 	@Override
-	public void OnInteract(ItemStack item, Player player) {
+	public void OnRedeem(ItemStack item, Player player) {
 		int amount = Main.CoinVaultLevels.get(getTier(item)).getRandom();
 		PenguinEconomyAPI.deposit(player, amount);
 		removeOne(item);
@@ -40,9 +40,9 @@ public class CoinPouch extends Interactable {
 	public boolean isItem(ItemStack item) {
 		return getLocname(item).startsWith("cp:");
 	}
-	
+
 	private int getTier(ItemStack item) {
 		return Integer.parseInt(getLocname(item).split(":")[1]);
 	}
-	
+
 }
