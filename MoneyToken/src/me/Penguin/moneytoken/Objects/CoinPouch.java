@@ -1,14 +1,20 @@
-package me.Penguin.moneytoken.Objects;
+package me.penguin.moneytoken.Objects;
+
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import me.Penguin.SuperPenguinCore.Main;
 import me.Penguin.SuperPenguinCore.API.PenguinEconomyAPI;
-import me.Penguin.SuperPenguinCore.Items.Redeemable;
+import me.Penguin.SuperPenguinCore.Items.Held.Redeemable;
 import me.Penguin.SuperPenguinCore.Util.MIB;
+import me.Penguin.SuperPenguinCore.Util.NumberFormatter;
+import me.Penguin.SuperPenguinCore.Util.m;
 import me.Penguin.SuperPenguinCore.Util.u;
-import me.Penguin.moneytoken.Main;
+import me.penguin.moneytoken.MoneyTokens;
 
 public class CoinPouch extends Redeemable {
 
@@ -30,10 +36,31 @@ public class CoinPouch extends Redeemable {
 
 	@Override
 	public void OnRedeem(ItemStack item, Player player) {
-		int amount = Main.CoinVaultLevels.get(getTier(item)).getRandom();
-		PenguinEconomyAPI.deposit(player, amount);
-		removeOne(item);
-		player.sendMessage(u.cc("&7Received &a$" + u.dc(amount)));
+		List<Player> inAnimation = MoneyTokens.getInstance().getInAnimation();
+		if (inAnimation.contains(player)) {
+			player.sendMessage(m.msg("&7Wait for your current coin vault to finish opening"));
+			return;
+		}
+		int tier = getTier(item);
+		int amount = MoneyTokens.getInstance().getCoinVaultLevels().get(tier).getRandom();
+		String view = (tier>3?"&6":"&f")+ "$" + NumberFormatter.addDelimiters(amount);		
+		inAnimation.add(player);
+		new BukkitRunnable() {			
+			int pointer = 2;
+			@Override
+			public void run() {
+				if (pointer == view.length()) {
+					cancel();
+					PenguinEconomyAPI.deposit(player, amount);
+					player.sendMessage(u.cc("&7Received &a$" + u.dc(amount)));
+					inAnimation.remove(player);
+				}
+				String title = u.cc(view.substring(0, pointer) + "&k" +  view.substring(pointer));
+				player.sendTitle(title, "", 0, 60, 10);
+				pointer++;
+			}
+		}.runTaskTimer(Main.getPlugin(Main.class), 0, 20);	
+		removeOne(item);		
 	}
 
 	@Override
